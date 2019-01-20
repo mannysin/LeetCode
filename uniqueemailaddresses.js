@@ -29,14 +29,38 @@ Each emails[i] contains exactly one '@' character.
 ---------------------------------------------------------------------------------------------------------------------------------
 My Approach:
 
+Create a counter variable.
+Create an object variable.
 
+Run a for loop
+
+Set a variable to split the emails at @, 
+
+Set a variable to split the first email string after a plus, regex to replace anything after a plus sign with an empty string and add the second part of the email back.
+
+Check if the new object suffices an email, return true and add to counter.
+
+Finally, return the counter.
 
 ---------------------------------------------------------------------------------------------------------------------------------
 My Solution:
 */
 
-let numUniqueEmails = function(emails) {
+let numUniqueEmails = (emails) => {
+    let counter = 0;
+    let emailsMap = Object.create(null);
     
+    for (i = 0; i < emails.length; i++) { 
+        let parts = emails[i].split("@");
+        let emailStr = parts[0].split("+")[0].replace(/\./g, "") + "@" + parts[1];
+
+        if (!emailsMap[emailStr]) {
+            emailsMap[emailStr] = true;
+            counter++;
+        }
+    }
+    
+    return counter;
 };
 
 //test case - expected output = "2"
